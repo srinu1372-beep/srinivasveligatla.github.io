@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veligatla Srinivas — Front End Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0B0C10;
+    --surface: #13151C;
+    --surface2: #1C1F2A;
+    --border: rgba(255,255,255,0.07);
+    --accent: #7C6BFF;
+    --accent2: #3ECFA0;
+    --accent3: #FF6B6B;
+    --text: #F0EEF8;
+    --muted: #8A88A0;
+    --dim: #5A586E;
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(11,12,16,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.15rem;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    padding: 0.55rem 1.3rem;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+    font-family: var(--font-body);
+  }
+  .nav-cta:hover { background: var(--accent); color: #fff; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 3rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 50%, rgba(124,107,255,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(62,207,160,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    border: 1px solid rgba(124,107,255,0.35);
+    border-radius: 50px;
+    background: rgba(124,107,255,0.08);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent2);
+    animation: pulse 2s ease infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.8); }
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 800;
+    line-height: 1.03;
+    letter-spacing: -0.04em;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 .name-line { display: block; }
+  .hero h1 .role-line {
+    display: block;
+    color: var(--muted);
+    font-weight: 400;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+  .hero-desc {
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    padding: 0.85rem 2rem;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(124,107,255,0.4);
+  }
+  .btn-ghost {
+    padding: 0.85rem 1.5rem;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--text); }
+
+  /* Hero stats */
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 3.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.04em;
+  }
+  .stat-num span { color: var(--accent); }
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 0.25rem;
+  }
+
+  /* Hero card */
+  .hero-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+  .avatar-ring {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 1.25rem;
+  }
+  .hero-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+  .hero-card .role-tag {
+    color: var(--accent2);
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+  .info-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.88rem;
+  }
+  .info-row:last-child { border-bottom: none; }
+  .info-icon {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    background: var(--surface2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+  .info-label { color: var(--dim); font-size: 0.78rem; }
+  .info-val { color: var(--text); font-weight: 500; font-size: 0.88rem; }
+
+  /* ── SECTION COMMON ── */
+  section {
+    padding: 6rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    max-width: 80px;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .section-sub {
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 540px;
+    margin-bottom: 3.5rem;
+  }
+
+  /* ── SKILLS ── */
+  .skills-wrap {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.25rem;
+  }
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .skill-card:hover {
+    border-color: rgba(124,107,255,0.3);
+    transform: translateY(-3px);
+  }
+  .skill-card-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .skill-card h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+  }
+  .tag {
+    padding: 0.25rem 0.65rem;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .tag.accent { border-color: rgba(124,107,255,0.3); color: var(--accent); background: rgba(124,107,255,0.08); }
+  .tag.green { border-color: rgba(62,207,160,0.3); color: var(--accent2); background: rgba(62,207,160,0.08); }
+  .tag.red { border-color: rgba(255,107,107,0.3); color: var(--accent3); background: rgba(255,107,107,0.08); }
+
+  /* ── EXPERIENCE ── */
+  .exp-wrap { position: relative; }
+  .exp-line {
+    position: absolute;
+    left: 24px;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+  .exp-item {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3.5rem;
+    position: relative;
+  }
+  .exp-dot {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    transition: border-color 0.2s;
+  }
+  .exp-item:hover .exp-dot { border-color: var(--accent); }
+  .exp-body {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem;
+    flex: 1;
+    transition: border-color 0.2s;
+  }
+  .exp-item:hover .exp-body { border-color: rgba(124,107,255,0.2); }
+  .exp-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .exp-company {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text);
+  }
+  .exp-role {
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-top: 0.15rem;
+  }
+  .exp-period {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    padding: 0.3rem 0.85rem;
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .exp-desc {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  .exp-points {
+    list-style: none;
+  }
+  .exp-points li {
+    color: var(--muted);
+    font-size: 0.88rem;
+    padding: 0.3rem 0;
+    padding-left: 1.25rem;
+    position: relative;
+  }
+  .exp-points li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.7rem;
+    top: 0.45rem;
+  }
+  .exp-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ── PORTFOLIO / PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+  }
+  .proj-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: border-color 0.2s, transform 0.2s;
+    text-decoration: none;
+    color: inherit;
+  }
+  .proj-card:hover {
+    border-color: rgba(124,107,255,0.3);
+    transform: translateY(-4px);
+  }
+  .proj-num {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--surface2);
+    line-height: 1;
+    letter-spacing: -0.06em;
+    transition: color 0.2s;
+  }
+  .proj-card:hover .proj-num { color: var(--accent); opacity: 0.35; }
+  .proj-name {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+  .proj-client {
+    color: var(--accent2);
+    font-size: 0.82rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .proj-desc {
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.65;
+    flex: 1;
+  }
+  .proj-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 0.5rem;
+  }
+  .proj-link svg {
+    transition: transform 0.2s;
+  }
+  .proj-card:hover .proj-link svg { transform: translate(3px,-3px); }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 4rem;
+    align-items: start;
+  }
+  .about-text p {
+    color: var(--muted);
+    line-height: 1.8;
+    font-size: 1.02rem;
+    margin-bottom: 1.25rem;
+  }
+  .about-highlights {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .highlight-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+  .highlight-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent2);
+    flex-shrink: 0;
+  }
+  .edu-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2rem;
+  }
+  .edu-card h3 {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+  }
+  .edu-item {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .edu-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .edu-degree {
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+  .edu-school {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-bottom: 0.35rem;
+  }
+  .edu-meta {
+    display: flex;
+    gap: 0.75rem;
+    font-size: 0.78rem;
+  }
+  .edu-score {
+    color: var(--accent2);
+    font-weight: 600;
+  }
+  .edu-year { color: var(--dim); }
+
+  /* ── CONTACT ── */
+  .contact-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 0%, rgba(124,107,255,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .contact-wrap h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  .contact-wrap p {
+    color: var(--muted);
+    font-size: 1.05rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+  }
+  .contact-links {
+    display: flex;
+    gap: 1.25rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 1.75rem;
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .contact-btn:hover { border-color: var(--accent); color: var(--text); background: rgba(124,107,255,0.08); }
+  .contact-btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .contact-btn.primary:hover { background: #6A59EF; box-shadow: 0 8px 30px rgba(124,107,255,0.4); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    color: var(--dim);
+    font-size: 0.82rem;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 3px; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-content > * {
+    animation: fadeUp 0.7s ease both;
+  }
+  .hero-badge { animation-delay: 0.1s; }
+  .hero h1 { animation-delay: 0.2s; }
+  .hero-desc { animation-delay: 0.3s; }
+  .hero-actions { animation-delay: 0.4s; }
+  .hero-stats { animation-delay: 0.5s; }
+  .hero-card { animation: fadeUp 0.8s 0.3s ease both; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 7rem 1.5rem 3rem; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-card { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; }
+    .contact-wrap { padding: 2.5rem 1.5rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">VS<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <a href="mailto:srinivasveligatla@gmail.com" class="nav-cta">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid">
+    <div class="hero-content">
+      <div class="hero-badge">Available for Work</div>
+      <h1>
+        <span class="name-line">Veligatla<br><em>Srinivas</em></span>
+        <span class="role-line">Front End Developer</span>
+      </h1>
+      <p class="hero-desc">
+        10+ years crafting pixel-perfect, performant web experiences using React, modern CSS, and thoughtful UX — turning complex requirements into intuitive interfaces.
+      </p>
+      <div class="hero-actions">
+        <a href="#experience" class="btn-primary">View My Work</a>
+        <a href="mailto:srinivasveligatla@gmail.com" class="btn-ghost">Get In Touch</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">10<span>+</span></div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div>
+          <div class="stat-num">4</div>
+          <div class="stat-label">Companies</div>
+        </div>
+        <div>
+          <div class="stat-num">10<span>+</span></div>
+          <div class="stat-label">Major Clients</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="avatar-ring">VS</div>
+      <h3>Veligatla Srinivas</h3>
+      <div class="role-tag">Senior Front End Developer</div>
+      <div class="info-row">
+        <div class="info-icon">📍</div>
+        <div>
+          <div class="info-label">Location</div>
+          <div class="info-val">Hyderabad, India</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">📧</div>
+        <div>
+          <div class="info-label">Email</div>
+          <div class="info-val">srinivasveligatla@gmail.com</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">📱</div>
+        <div>
+          <div class="info-label">Phone</div>
+          <div class="info-val">+91 7207265356</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">🎓</div>
+        <div>
+          <div class="info-label">Education</div>
+          <div class="info-val">MCA — Andhra University</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">💼</div>
+        <div>
+          <div class="info-label">Current Role</div>
+          <div class="info-val">Senior Software Engineer @ Solix</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">What I Know</div>
+  <h2 class="section-title">Technical Skills</h2>
+  <p class="section-sub">A decade of hands-on experience across the full front-end spectrum — from markup to complex state management.</p>
+
+  <div class="skills-wrap">
+    <div class="skill-card">
+      <div class="skill-card-icon">⚡</div>
+      <h4>Scripting Languages</h4>
+      <div class="skill-tags">
+        <span class="tag accent">JavaScript ES6+</span>
+        <span class="tag accent">TypeScript</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">🌐</div>
+      <h4>Web Technologies</h4>
+      <div class="skill-tags">
+        <span class="tag">HTML 4 & 5</span>
+        <span class="tag">CSS 2.1 & 3</span>
+        <span class="tag">DHTML</span>
+        <span class="tag">XML</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">⚛️</div>
+      <h4>Libraries & Frameworks</h4>
+      <div class="skill-tags">
+        <span class="tag accent">React JS</span>
+        <span class="tag accent">Redux</span>
+        <span class="tag">jQuery</span>
+        <span class="tag">Node.js</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">🎨</div>
+      <h4>CSS Frameworks & Preprocessors</h4>
+      <div class="skill-tags">
+        <span class="tag green">Bootstrap 3 & 4</span>
+        <span class="tag">SASS</span>
+        <span class="tag">LESS</span>
+        <span class="tag">Responsive Design</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">🔧</div>
+      <h4>CMS & E-Commerce</h4>
+      <div class="skill-tags">
+        <span class="tag">WordPress</span>
+        <span class="tag">Beaver Builder</span>
+        <span class="tag">WooCommerce</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">🖼️</div>
+      <h4>Design Tools</h4>
+      <div class="skill-tags">
+        <span class="tag red">Figma</span>
+        <span class="tag">Adobe XD</span>
+        <span class="tag">Photoshop</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">🛠️</div>
+      <h4>Dev Tools & Version Control</h4>
+      <div class="skill-tags">
+        <span class="tag">Git</span>
+        <span class="tag">SVN</span>
+        <span class="tag">Eclipse</span>
+        <span class="tag">VS Code</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">📐</div>
+      <h4>Key Competencies</h4>
+      <div class="skill-tags">
+        <span class="tag green">UI Designing</span>
+        <span class="tag green">Wireframes</span>
+        <span class="tag green">SPAs</span>
+        <span class="tag">Page Speed Optimization</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="background: linear-gradient(180deg, transparent 0%, rgba(124,107,255,0.03) 50%, transparent 100%); max-width: 100%; padding: 6rem 0;">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 0 3rem;">
+    <div class="section-label">Career Timeline</div>
+    <h2 class="section-title">Work Experience</h2>
+    <p class="section-sub">10+ years of growth across startups, product companies, and enterprise-level organizations.</p>
+
+    <div class="exp-wrap">
+      <div class="exp-line"></div>
+
+      <!-- Solix -->
+      <div class="exp-item">
+        <div class="exp-dot">🏢</div>
+        <div class="exp-body">
+          <div class="exp-header">
+            <div>
+              <div class="exp-company">Solix Technologies, Inc.</div>
+              <div class="exp-role">Senior Software Engineer — Senior UI Designer</div>
+            </div>
+            <span class="exp-period">Oct 2023 – Present</span>
+          </div>
+          <p class="exp-desc">Working on the Solix Common Data Platform (CDP) — an enterprise data management solution unifying legacy, inactive, and active data for infrastructure optimization, ILM, and advanced analytics.</p>
+          <ul class="exp-points">
+            <li>Designed visual elements including layouts, color schemes, typography, and interactive components aligned with UX goals</li>
+            <li>Led responsive design implementation using Bootstrap 4.0, ensuring cross-device consistency</li>
+            <li>Created wireframes, mockups, and interactive prototypes for stakeholder review</li>
+            <li>Wrote clean, modular, and reusable component libraries to accelerate development cycles</li>
+            <li>Served as primary client contact — gathered requirements and translated them into actionable plans</li>
+          </ul>
+          <div class="exp-tech">
+            <span class="tag accent">React JS</span>
+            <span class="tag accent">ES6</span>
+            <span class="tag">HTML5</span>
+            <span class="tag">CSS3</span>
+            <span class="tag">SASS</span>
+            <span class="tag">LESS</span>
+            <span class="tag green">Bootstrap 4</span>
+            <span class="tag">Agile</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Value Momentum -->
+      <div class="exp-item">
+        <div class="exp-dot">🛡️</div>
+        <div class="exp-body">
+          <div class="exp-header">
+            <div>
+              <div class="exp-company">ValueMomentum</div>
+              <div class="exp-role">Senior Software Engineer — Team Member</div>
+            </div>
+            <span class="exp-period">Oct 2019 – Jul 2023</span>
+          </div>
+          <p class="exp-desc">Insurance-focused IT services firm. Built the Bamboo Insurance platform, delivering cutting-edge React UI components for complex policy and claims workflows.</p>
+          <ul class="exp-points">
+            <li>Led design and development of captivating UI components enhancing visual appeal and functionality</li>
+            <li>Implemented complex UI features using advanced React concepts — hooks, context, performance optimization</li>
+            <li>Provided technical leadership and mentorship to junior developers</li>
+            <li>Managed Git-based version control and spearheaded build deployment processes</li>
+            <li>Created comprehensive UI design documents with wireframes, mockups, and prototypes</li>
+          </ul>
+          <div class="exp-tech">
+            <span class="tag accent">React JS</span>
+            <span class="tag accent">Redux</span>
+            <span class="tag accent">ES6</span>
+            <span class="tag">HTML5</span>
+            <span class="tag">CSS3</span>
+            <span class="tag green">Bootstrap 4</span>
+            <span class="tag">Git</span>
+            <span class="tag">Agile</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vsplash -->
+      <div class="exp-item">
+        <div class="exp-dot">🏖️</div>
+        <div class="exp-body">
+          <div class="exp-header">
+            <div>
+              <div class="exp-company">Vsplash Tech Lab</div>
+              <div class="exp-role">Web Designer & Integrator — Team Member</div>
+            </div>
+            <span class="exp-period">Jan 2019 – Jun 2019</span>
+          </div>
+          <p class="exp-desc">Developed ESVR — Maryland Eastern Shore Vacation Rentals platform. Built custom WordPress themes and integrated WooCommerce for property booking experiences.</p>
+          <ul class="exp-points">
+            <li>Developed custom WordPress themes and WooCommerce integrations</li>
+            <li>Designed a custom dashboard for data visualization and management using HTML, CSS, and ES6</li>
+            <li>Conducted cross-browser testing to ensure consistent performance</li>
+            <li>Implemented page speed optimization techniques and security best practices</li>
+          </ul>
+          <div class="exp-tech">
+            <span class="tag">HTML5</span>
+            <span class="tag">CSS3</span>
+            <span class="tag green">Bootstrap 4</span>
+            <span class="tag">WordPress</span>
+            <span class="tag">WooCommerce</span>
+            <span class="tag">ES6</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kush -->
+      <div class="exp-item">
+        <div class="exp-dot">💻</div>
+        <div class="exp-body">
+          <div class="exp-header">
+            <div>
+              <div class="exp-company">Kush Infosystems Pvt. Ltd.</div>
+              <div class="exp-role">Web Developer — Team Member</div>
+            </div>
+            <span class="exp-period">Oct 2014 – Dec 2018</span>
+          </div>
+          <p class="exp-desc">Developed the SC Kiosk platform. Focused on pixel-perfect PSD to HTML conversion, responsive layouts, and robust client-facing UI development over four years.</p>
+          <ul class="exp-points">
+            <li>Pixel-perfect PSD to HTML conversion ensuring design fidelity</li>
+            <li>Implemented responsive design principles across desktops, tablets, and mobiles</li>
+            <li>Conducted in-depth client consultations to translate needs into development plans</li>
+            <li>Collaborated within cross-functional teams to refine project strategies</li>
+          </ul>
+          <div class="exp-tech">
+            <span class="tag">HTML5</span>
+            <span class="tag">CSS3</span>
+            <span class="tag green">Bootstrap 4</span>
+            <span class="tag">JavaScript</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Featured Work</div>
+  <h2 class="section-title">Projects</h2>
+  <p class="section-sub">Enterprise-scale platforms and industry-specific solutions built for high-impact clients.</p>
+
+  <div class="projects-grid">
+    <div class="proj-card">
+      <div class="proj-num">01</div>
+      <div class="proj-client">Solix Technologies · AIG · Citigroup · Experian</div>
+      <div class="proj-name">Solix Common Data Platform (CDP)</div>
+      <p class="proj-desc">Enterprise data management platform unifying legacy, inactive, and active data in a single scalable and compliant environment — enabling data-driven analytics and ILM for Fortune 500 clients.</p>
+      <div class="skill-tags">
+        <span class="tag accent">React JS</span>
+        <span class="tag">ES6</span>
+        <span class="tag">CSS3</span>
+        <span class="tag">Bootstrap</span>
+      </div>
+      <a href="https://www.solix.com/" class="proj-link" target="_blank">
+        Visit Solix
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
+      </a>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-num">02</div>
+      <div class="proj-client">ValueMomentum · Bamboo Insurance</div>
+      <div class="proj-name">Bamboo Insurance Platform</div>
+      <p class="proj-desc">Full-stack insurance web platform with complex policy management workflows, responsive React components, and optimized UX for both agents and policyholders.</p>
+      <div class="skill-tags">
+        <span class="tag accent">React JS</span>
+        <span class="tag accent">Redux</span>
+        <span class="tag">HTML5</span>
+        <span class="tag green">Bootstrap</span>
+      </div>
+      <a href="https://www.bizdynamics.com/index.html" class="proj-link" target="_blank">
+        View Portfolio
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
+      </a>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-num">03</div>
+      <div class="proj-client">Vsplash · ESVR</div>
+      <div class="proj-name">Maryland Eastern Shore Vacation Rentals</div>
+      <p class="proj-desc">Custom WordPress + WooCommerce vacation rental platform for Maryland's Eastern Shore — featuring property listings, booking flows, and a bespoke admin dashboard.</p>
+      <div class="skill-tags">
+        <span class="tag">WordPress</span>
+        <span class="tag">WooCommerce</span>
+        <span class="tag">HTML5</span>
+        <span class="tag">CSS3</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-num">04</div>
+      <div class="proj-client">Kush Infosystems · Matthew Conway</div>
+      <div class="proj-name">SC Kiosk</div>
+      <p class="proj-desc">Interactive kiosk interface developed with pixel-perfect precision, responsive layouts, and a seamless user flow across a diverse range of devices and screen sizes.</p>
+      <div class="skill-tags">
+        <span class="tag">HTML5</span>
+        <span class="tag">CSS3</span>
+        <span class="tag green">Bootstrap 4</span>
+        <span class="tag">JavaScript</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About Me</div>
+  <h2 class="section-title">A bit about Srinivas</h2>
+
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        I'm a Front End Developer with 10+ years of experience building intuitive, high-performance web applications for enterprise clients across insurance, data management, real estate, and e-commerce.
+      </p>
+      <p>
+        My passion lies in the intersection of design and engineering — taking complex business requirements and crafting user interfaces that feel effortless to use. I specialize in React.js, modern JavaScript, and CSS architecture, with a deep understanding of responsive design and cross-browser compatibility.
+      </p>
+      <p>
+        I thrive in Agile environments, have led front-end teams, and have a strong track record working with clients like AIG, Citigroup, Experian, HCSC, and Optum on enterprise-scale platforms.
+      </p>
+      <div class="about-highlights">
+        <div class="highlight-item"><div class="highlight-dot"></div> React JS & Redux Expert</div>
+        <div class="highlight-item"><div class="highlight-dot"></div> Responsive Design Specialist</div>
+        <div class="highlight-item"><div class="highlight-dot"></div> Agile & Scrum Practiced</div>
+        <div class="highlight-item"><div class="highlight-dot"></div> UI/UX Prototyping</div>
+        <div class="highlight-item"><div class="highlight-dot"></div> WordPress & WooCommerce</div>
+        <div class="highlight-item"><div class="highlight-dot"></div> Page Speed Optimization</div>
+        <div class="highlight-item"><div class="highlight-dot"></div> Cross-browser Testing</div>
+        <div class="highlight-item"><div class="highlight-dot"></div> Technical Mentorship</div>
+      </div>
+    </div>
+
+    <div class="edu-card">
+      <h3>🎓 Education</h3>
+      <div class="edu-item">
+        <div class="edu-degree">Master of Computer Applications (MCA)</div>
+        <div class="edu-school">Sri Y.N.M College, Narsa Puram — Andhra University</div>
+        <div class="edu-meta">
+          <span class="edu-score">75%</span>
+          <span class="edu-year">2013</span>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-degree">B.Sc. Computers (Bsc.com)</div>
+        <div class="edu-school">Sri Aditya Degree College — Andhra University</div>
+        <div class="edu-meta">
+          <span class="edu-score">60%</span>
+          <span class="edu-year">2010</span>
+        </div>
+      </div>
+
+      <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+        <h3 style="margin-bottom: 1rem;">👤 Personal Info</h3>
+        <div class="info-row" style="border: none; padding: 0.4rem 0;">
+          <span style="color: var(--dim); font-size: 0.82rem; width: 120px;">Date of Birth</span>
+          <span style="font-size: 0.88rem; color: var(--muted);">07 July 1989</span>
+        </div>
+        <div class="info-row" style="border: none; padding: 0.4rem 0;">
+          <span style="color: var(--dim); font-size: 0.82rem; width: 120px;">Nationality</span>
+          <span style="font-size: 0.88rem; color: var(--muted);">Indian</span>
+        </div>
+        <div class="info-row" style="border: none; padding: 0.4rem 0;">
+          <span style="color: var(--dim); font-size: 0.82rem; width: 120px;">Languages</span>
+          <span style="font-size: 0.88rem; color: var(--muted);">Telugu, English, Hindi</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section>
+  <div class="contact-wrap">
+    <h2>Let's build something<br>extraordinary together</h2>
+    <p>Open to exciting front-end opportunities, freelance projects, and collaborations. Let's talk!</p>
+    <div class="contact-links">
+      <a href="mailto:srinivasveligatla@gmail.com" class="contact-btn primary">
+        ✉️ srinivasveligatla@gmail.com
+      </a>
+      <a href="tel:+917207265356" class="contact-btn">
+        📱 +91 7207265356
+      </a>
+      <a href="https://www.bizdynamics.com/index.html" target="_blank" class="contact-btn">
+        🌐 Portfolio
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2024 Veligatla Srinivas. All rights reserved.</span>
+  <span>Built with ♥ in Hyderabad, India</span>
+</footer>
+
+</body>
+</html>
